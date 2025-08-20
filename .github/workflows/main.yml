@@ -18,12 +18,10 @@ jobs:
           distribution: 'temurin'   # <- asta lipsea
           java-version: '11'
 
-      - name: Run COBOL Check
-        env:
-          ZOWE_USERNAME: ${{ secrets.ZOWE_USERNAME }}
-          ZOWE_PASSWORD: ${{ secrets.ZOWE_PASSWORD }}
-        run: |
-          echo "Running COBOL Check"
-          # aici trebuie să pui comanda reală de rulare a cobol-check
-          # de exemplu:
-          # java -jar cobol-check-<versiune>.jar --directory src --test test
+      -name: Setup Mainframe Environment and Upload COBOL Check
+       env:
+         ZOWE_USERNAME: ${{ secrets.ZOWE_USERNAME }}
+         ZOWE_PASSWORD: ${{ secrets.ZOWE_PASSWORD }}
+     run: |
+       chmod +x .github/scripts/zowe_operations.sh
+       .github/scripts/zowe_operations.sh
